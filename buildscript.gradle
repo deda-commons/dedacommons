@@ -1,16 +1,6 @@
 repositories {
 		jcenter()
-        maven {
-        url 'https://pkgs.dev.azure.com/dedaArtifacts/deda-commons/_packaging/deda-commons/maven/v1'
-        credentials {
-	            username = "dedaArtifacts"
-	            password = "dlrczgbfocttlhd35ghgx35gt722cz55yawoetbledb3rdsy3ama"
-	        }
-        authentication {
-        basic(BasicAuthentication)
-    		}
-		}
-   	 }
+          	 }
 apply from: 'https://gitlab.fbk.eu/trec-public/common-config/raw/master/gradle/repositories.gradle'
 
 dependencies {
