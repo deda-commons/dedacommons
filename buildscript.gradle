@@ -1,0 +1,64 @@
+repositories {
+		jcenter()
+        maven {
+        url 'https://pkgs.dev.azure.com/dedaArtifacts/deda-commons/_packaging/deda-commons/maven/v1'
+        credentials {
+	            username = "dedaArtifacts"
+	            password = "dlrczgbfocttlhd35ghgx35gt722cz55yawoetbledb3rdsy3ama"
+	        }
+        authentication {
+        basic(BasicAuthentication)
+    		}
+		}
+   	 }
+apply from: 'https://gitlab.fbk.eu/trec-public/common-config/raw/master/gradle/repositories.gradle'
+
+dependencies {
+	compile 'eu.fbk.trec:audit-logger-client:+'
+	
+	compile group: 'io.prometheus', name: 'simpleclient', version: '0.5.0'
+	compile group: 'io.prometheus', name: 'simpleclient_spring_boot', version: '0.5.0'
+	compile group: 'io.micrometer', name: 'micrometer-registry-prometheus', version: '1.0.11'
+	
+	compile group: 'io.github.resilience4j', name: 'resilience4j-spring-boot2', version: '1.2.0'
+	
+	compile "org.glassfish.hk2:hk2-api:+"
+	
+	compile 'io.springfox:springfox-swagger2:2.8.0'
+	compile 'io.springfox:springfox-swagger-ui:2.8.0'
+	
+	compile 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.4'
+	
+	compile group: 'com.squareup.retrofit2', name: 'converter-jackson', version: '2.5.0'
+    
+    implementation 'org.springframework.boot:spring-boot-dependencies:2.0.5.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	
+	compile(group: 'deda-commons', name: 'deda-commons-server', version: '2.0.+')
+}
+
+bootJar {  archiveFileName = "app.jar"
+	exclude {(it.name =~ /auto-service-annotations-1.0-rc6./)}
+	exclude {(it.name =~ /autotransient-1./)}
+	exclude {(it.name =~ /auto-value-annotations-1./)}
+	exclude {(it.name =~ /auto-value-gson-runtime-1./)}
+	exclude {(it.name =~ /converter-gson-2./)}
+	exclude {(it.name =~ /gson-2./)}
+	exclude {(it.name =~ /javax.inject-1./)}
+	exclude {(it.name =~ /javax.ws.rs-api-2./)}
+	exclude {(it.name =~ /jjwt-api-0./)}
+	exclude {(it.name =~ /jjwt-impl-0./)}
+	exclude {(it.name =~ /jjwt-jackson-0./)}
+	exclude {(it.name =~ /jsr305-3./)}
+	exclude {(it.name =~ /lib-exceptions-1./)}
+	exclude {(it.name =~ /lib-security-0./)}
+	exclude {(it.name =~ /lib-service-names-1./)}
+	exclude {(it.name =~ /owner-1./)}
+	exclude {(it.name =~ /owner-java8-1./)}
+   }
+
+processResources {
+    exclude('manual/*.xml')   
+}
+
